@@ -2,6 +2,7 @@ public class ContactList {
     public Contact head;
     public Contact tail;
     public int size;
+    //
 
     public ContactList(){
         this.head = this.tail = null;

@@ -1,4 +1,4 @@
-public class Contact {
+public class Contact { //Node
     public String name;
     public int number;
     public Contact next;

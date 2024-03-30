@@ -1,4 +1,4 @@
-public class ContactList {
+public class ContactList { //Singley Linked List
     public Contact head;
     public Contact tail;
     public int size;

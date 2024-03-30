@@ -10,7 +10,7 @@ public class RecentCalls { //stack
     }
     void addCaller(int caller){ //push();
         if(isFull()){
-            pop();
+            popBottom();
         }
         callStack[++top] = caller;
     }
@@ -22,7 +22,7 @@ public class RecentCalls { //stack
             return;
         }
         for (int i = 0; i < top; i++) {
-            stackArray[i] = stackArray[i + 1];
+            callStack[i] = callStack[i + 1];
         }
         top--;
     }
@@ -31,7 +31,7 @@ public class RecentCalls { //stack
     public void display() { // show most recent call on top
         System.out.println("Elements in the stack:");
         for (int i = top; i >= 0; i--) {
-            System.out.println(stackArray[i]);
+            System.out.println(callStack[i]);
         }
     }
 

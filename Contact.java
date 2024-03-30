@@ -1,10 +1,10 @@
 public class Contact { //Node
     public String name;
-    public int number;
+    public String number;
     public Contact next;
     public Contact prev; 
 
-    public Contact(String name, int number){
+    public Contact(String name, String number){
         this.name = name;
         this.number = number;
     }

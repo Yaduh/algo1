@@ -1,5 +1,6 @@
 public class Main {
     public static void main(String... args) {
-        Input.phone();
+        System.out.println("Welcome to the Phone Book App\n");
+        PhoneBook.phone();
     }
 }

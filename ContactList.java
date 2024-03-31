@@ -2,12 +2,14 @@
 public class ContactList { //Singley Linked List
     public Contact head;
     public Contact tail;
+    public RecentCalls recentCalls;
     public int size;
 
     public ContactList(){
         this.head = null;
         this.tail = null;
         this.size = 0;
+        this.recentCalls = new RecentCalls();
     };
 
     //adds new contact to the end of the list if name is not duplicated
@@ -59,9 +61,16 @@ public class ContactList { //Singley Linked List
         Contact callContact = findContact(callName);
 
         if (callContact != null) {
-            System.out.printf("Calling %s on the number: %s...",callContact.name,callContact.number);
+            System.out.println("Calling " + callContact.name + " on the number: " + callContact.number + "...");
+            this.recentCalls.addCaller(callContact);
+            return;
         };
+        System.out.println("Contact Name Not Found");
     };
+
+    public void recentCalls(){
+        this.recentCalls.display();
+    }
 
     public void modifyContactName(String oldContactName,String newName){
         Contact oldContact = findContact(newName);
@@ -70,15 +79,15 @@ public class ContactList { //Singley Linked List
         };
     }
 
-    public void modifyContactNumber(String oldContactName, String newNumber){
-        Contact oldContact = findContact(oldContactName);
-        if (oldContact != null) {
-            oldContact.number = newNumber;
-        };
-    }
+    // public void modifyContactNumber(String oldContactName, String newNumber){
+    //     Contact oldContact = findContact(oldContactName);
+    //     if (oldContact != null) {
+    //         oldContact.number = newNumber;
+    //     };
+    // }
 
     public void displayContactList(){
-        // this.sort();
+        this.sort();
         Contact current = this.head;
         while (current != null) {
             System.out.println(current.name + ": " + current.number);
@@ -104,7 +113,7 @@ public class ContactList { //Singley Linked List
         return null;
     };
 
-    public void sort() {
+    private void sort() {
         head = mergeSort(head);
         Contact temp = head;
         while (temp != null && temp.next != null) {

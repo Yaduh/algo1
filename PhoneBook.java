@@ -1,13 +1,10 @@
 import java.util.Scanner;
 
 public class PhoneBook { // Input
-    private static Scanner input = new Scanner(System.in);
-    private static ContactList contacts = new ContactList();
-    public static void phone() {
-        home();
-    }
+    private ContactList contacts = new ContactList();
 
-    static void home() {
+    public void app() {
+        Scanner input = new Scanner(System.in);
         int choice = -1;
         while (choice != 0) {
             System.out.println("Menu:\nOperations:\n1. Save Contact\n2. Display Contact\n3. Call Contact\n4. Recent Contacts\n5. Delete Contact\n6. Modify Contact\n0. Exit");
@@ -15,19 +12,19 @@ public class PhoneBook { // Input
             choice = input.nextInt();
             switch (choice) {
                 case 1:
-                    saveContact();
+                    contacts.addContact(getContactName(),getContactNumber());
                     break;
                 case 2:
-                    // displayContact();
+                    contacts.displayContactList();
                     break;
                 case 3:
-                    // callContact();
+                    contacts.callContact(getContactName());
                     break;
                 case 4:
                     // recentContacts();
                     break;
                 case 5:
-                    // deleteContact();
+                    contacts.deleteContact(getContactName());
                     break;
                 case 6:
                     // modifyContact();
@@ -39,26 +36,22 @@ public class PhoneBook { // Input
                     System.out.println("Invalid choice. Please select a valid option.");
                     break;
             }
+            input.close();
         }
     }
 
-    public static void saveContact() {
-        System.out.print("Enter the contact's first name: ");
+    public String getContactName(){
+        Scanner input = new Scanner(System.in);
+        System.out.println("Enter the contact's first name: ");
         String name = input.nextLine();
-        input.nextLine();
+        return name;
+    }
 
-        System.out.print("Enter the contact's Phone number: ");
-        String phoneNumber = input.nextLine();
-
-        
-        contacts.addContact(name, phoneNumber);
+    public String getContactNumber(){
+        Scanner input = new Scanner(System.in);
+        System.out.println("Enter the contact's phone number: ");
+        String number = input.nextLine();
+        return number;
     }
-    public static void callContact(){
-        System.out.print("Enter the contacts first name to call: ");
-        String name = input.nextLine();
-        input.nextLine();
-        contacts.callContact(name);
-        System.out.println("Called "+ name + " successfully!");
-    }
-    }
+}
 

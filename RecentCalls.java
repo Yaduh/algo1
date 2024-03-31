@@ -1,14 +1,15 @@
 public class RecentCalls { //stack
-    int [] callStack;
+    Contact [] callStack;
     int top;
     int size;
 
-    RecentCalls(int size){
-        this.size = size;
-        callStack = new int [size];
+    RecentCalls(){
+        this.size = 15;
+        callStack = new Contact [this.size];
         top = -1;
     }
-    void addCaller(int caller){ //push();
+
+    public void addCaller(Contact caller){ //push();
         if(isFull()){
             popBottom();
         }
@@ -16,7 +17,7 @@ public class RecentCalls { //stack
     }
 
     // Method to pop an element from the stack
-    public void popBottom() { // pop(); remove outdated call. (older than 10 past calls)
+    private void popBottom() { // pop(); remove outdated call. (older than 10 past calls)
         if (isEmpty()) {
             System.out.println("Error: Stack is empty.");
             return;
@@ -30,16 +31,20 @@ public class RecentCalls { //stack
 
     public void display() { // show most recent call on top
         System.out.println("Elements in the stack:");
+        if (isEmpty()) {
+            System.out.println("No calls were made");
+            return;
+        }
         for (int i = top; i >= 0; i--) {
-            System.out.println(callStack[i]);
+            System.out.println(callStack[i].name + " was called at number: " + callStack[i].number);
         }
     }
 
-    boolean isFull(){
+    private boolean isFull(){
         return top >= size-1;
     }
     
-    boolean isEmpty(){
+    private boolean isEmpty(){
         return top < 0;
     }
 

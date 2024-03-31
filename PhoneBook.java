@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class PhoneBook { // Input
     private static Scanner input = new Scanner(System.in);
-
+    private static ContactList contacts = new ContactList();
     public static void phone() {
         home();
     }
@@ -45,13 +45,20 @@ public class PhoneBook { // Input
     public static void saveContact() {
         System.out.print("Enter the contact's first name: ");
         String name = input.nextLine();
-        // Consume the newline character left in the buffer
         input.nextLine();
 
         System.out.print("Enter the contact's Phone number: ");
         String phoneNumber = input.nextLine();
 
-        Contact contact = new Contact(name, phoneNumber);
-        ContactList.addContact(contact);
+        
+        contacts.addContact(name, phoneNumber);
     }
-}
+    public static void callContact(){
+        System.out.print("Enter the contacts first name to call: ");
+        String name = input.nextLine();
+        input.nextLine();
+        contacts.callContact(name);
+        System.out.println("Called "+ name + " successfully!");
+    }
+    }
+

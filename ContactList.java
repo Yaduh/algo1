@@ -7,7 +7,7 @@ public class ContactList { //Singley Linked List
         this.head = null;
         this.tail = null;
         this.size = 0;
-    };
+    }
 
     //adds new contact to the end of the list if name is not duplicated
     public void addContact(String name, String number){
@@ -26,7 +26,7 @@ public class ContactList { //Singley Linked List
             return;
         }
         System.out.println("Contact Name Already exists. Please choose a different name");
-    };
+    }
 
     public void deleteContact(String deleteName){
         Contact deleteContact = findContact(deleteName);
@@ -50,30 +50,33 @@ public class ContactList { //Singley Linked List
             deleteContact.next = deleteContact.prev = null;
             this.size--;
             return;
-        };
+        }
 
-    };
+    }
 
     public void callContact(String callName){
         Contact callContact = findContact(callName);
 
         if (callContact != null) {
             System.out.printf("Calling %s on the number: %s...",callContact.name,callContact.number);
-        };
-    };
+        }
+        else{
+            System.out.println("Call failed... Contact not found.");
+        }
+    }
 
     public void modifyContactName(String oldContactName,String newName){
         Contact oldContact = findContact(newName);
         if (oldContact != null) {
             oldContact.number = newName;
-        };
+        }
     }
 
     public void modifyContactNumber(String oldContactName, String newNumber){
         Contact oldContact = findContact(oldContactName);
         if (oldContact != null) {
             oldContact.number = newNumber;
-        };
+        }
     }
 
     public void displayContactList(){
@@ -89,13 +92,13 @@ public class ContactList { //Singley Linked List
 
             if (currentContact.name == findName) {
                 return currentContact;
-            };
+            }
 
             currentContact = currentContact.next;
 
-        };
+        }
 
         System.out.println("Provided Name Does Not Exist in the Contact List");
         return null;
-    };
+    }
 }

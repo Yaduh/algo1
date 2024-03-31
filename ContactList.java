@@ -1,3 +1,4 @@
+
 public class ContactList { //Singley Linked List
     public Contact head;
     public Contact tail;
@@ -18,7 +19,7 @@ public class ContactList { //Singley Linked List
             this.size++;
             return;
         } 
-        if (findContact(newContact.name) != null) {
+        if (findContact(newContact.name) == null) {
             this.tail.next = newContact;
             this.tail = newContact;
             System.out.println("Contact Added Successfully");
@@ -77,15 +78,20 @@ public class ContactList { //Singley Linked List
     }
 
     public void displayContactList(){
-
+        // this.sort();
+        Contact current = this.head;
+        while (current != null) {
+            System.out.println(current.name + ": " + current.number);
+            current = current.next;
+        }
     }
 
     //searches for contact by name
     //returns searched contact or null if not found 
-    public Contact findContact(String findName){
+    private Contact findContact(String findName){
         Contact currentContact = this.head;
 
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < this.size; i++) {
 
             if (currentContact.name == findName) {
                 return currentContact;
@@ -95,7 +101,68 @@ public class ContactList { //Singley Linked List
 
         };
 
-        System.out.println("Provided Name Does Not Exist in the Contact List");
         return null;
     };
+
+    public void sort() {
+        head = mergeSort(head);
+        Contact temp = head;
+        while (temp != null && temp.next != null) {
+            temp.next.prev = temp;
+            temp = temp.next;
+        }
+        tail = temp;
+    }
+
+    private Contact mergeSort(Contact head) {
+
+        if (head == null || head.next == null) {
+            return head;
+        }
+
+        Contact middle = getMiddle(head);
+        Contact nextOfMiddle = middle.next;
+        middle.next = null;
+
+        Contact left = mergeSort(head);
+        Contact right = mergeSort(nextOfMiddle);
+
+        return merge(left, right);
+    }
+
+    private Contact merge(Contact left, Contact right) {
+
+        if (left == null) return right;
+        if (right == null) return left;
+
+        Contact result;
+
+        if (left.name.compareTo(right.name) <= 0) {
+            result = left;
+            result.next = merge(left.next, right);
+            if (result.next != null) {
+                result.next.prev = result;
+            }
+        } else {
+            result = right;
+            result.next = merge(left, right.next);
+            if (result.next != null) {
+                result.next.prev = result;
+            }
+        }
+        return result;
+    }
+
+    // Find the middle Contact of the list
+    private Contact getMiddle(Contact head) {
+        if (head == null) return head;
+
+        Contact slow = head, fast = head;
+        while (fast.next != null && fast.next.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        return slow;
+    }
+
 }

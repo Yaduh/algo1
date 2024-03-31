@@ -97,7 +97,7 @@ public class ContactList { //Singley Linked List
             currentGroup = firstChar;
             System.out.println(currentGroup);
             System.out.println("_________________");
-            System.err.println();
+            System.out.println();
         }
 
         // Print contacts in the current group
@@ -105,7 +105,7 @@ public class ContactList { //Singley Linked List
             System.out.println(current.name);
             current = current.next;
         }
-        System.err.println("-----------");
+        System.out.println("-----------");
     }
     }
 

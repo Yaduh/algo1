@@ -113,7 +113,7 @@ public class ContactList { //Singley Linked List
         return null;
     };
 
-    private void sort() {
+    public void sort() {
         head = mergeSort(head);
         Contact temp = head;
         while (temp != null && temp.next != null) {

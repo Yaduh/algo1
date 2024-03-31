@@ -10,17 +10,18 @@ public class ContactList { //Singley Linked List
     };
 
     //adds new contact to the end of the list if name is not duplicated
-    public void addContact(Contact newContact){
+    public void addContact(String name, String number){
+        Contact newContact = new Contact(name, number);
         if (this.size == 0) {
-            this.head = newContact;
-            System.out.println("Contact Added Successfully to the start!");
+            this.head = this.tail = newContact;
+            System.out.println("Contact Added Successfully");
             this.size++;
             return;
         } 
         if (findContact(newContact.name) != null) {
             this.tail.next = newContact;
             this.tail = newContact;
-            System.out.println("Contact Added Successfully!");
+            System.out.println("Contact Added Successfully");
             this.size++;
             return;
         }
@@ -30,14 +31,14 @@ public class ContactList { //Singley Linked List
     public void deleteContact(String deleteName){
         Contact deleteContact = findContact(deleteName);
         if (deleteContact != null){
-            if (deleteContact.next == null) {
+            if (deleteContact == this.tail) {
                 deleteContact.prev.next = null;
                 this.tail = deleteContact.prev;
                 deleteContact.prev = null;
                 this.size--;
                 return;
             }
-            if (deleteContact.prev == null) {
+            if (deleteContact == this.head) {
                 deleteContact.next.prev = null;
                 this.head = deleteContact.next;
                 deleteContact.next = null;
@@ -73,6 +74,10 @@ public class ContactList { //Singley Linked List
         if (oldContact != null) {
             oldContact.number = newNumber;
         };
+    }
+
+    public void displayContactList(){
+
     }
 
     //searches for contact by name

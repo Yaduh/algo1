@@ -89,10 +89,24 @@ public class ContactList { //Singley Linked List
     public void displayContactList(){
         this.sort();
         Contact current = this.head;
+        char currentGroup = ' '; // Initialize to an arbitrary value
         while (current != null) {
-            System.out.println(current.name + ": " + current.number);
+        char firstChar = Character.toUpperCase(current.name.charAt(0));
+        if (firstChar != currentGroup) {
+            // Start of a new group
+            currentGroup = firstChar;
+            System.out.println(currentGroup);
+            System.out.println("_________________");
+            System.err.println();
+        }
+
+        // Print contacts in the current group
+        while (current != null && Character.toUpperCase(current.name.charAt(0)) == currentGroup) {
+            System.out.println(current.name);
             current = current.next;
         }
+        System.err.println("-----------");
+    }
     }
 
     //searches for contact by name
@@ -113,7 +127,7 @@ public class ContactList { //Singley Linked List
         return null;
     };
 
-    public void sort() {
+    private void sort() {
         head = mergeSort(head);
         Contact temp = head;
         while (temp != null && temp.next != null) {
@@ -146,7 +160,7 @@ public class ContactList { //Singley Linked List
 
         Contact result;
 
-        if (left.name.compareTo(right.name) <= 0) {
+        if (left.name.compareToIgnoreCase(right.name) <= 0) {
             result = left;
             result.next = merge(left.next, right);
             if (result.next != null) {

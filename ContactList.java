@@ -29,8 +29,25 @@ public class ContactList { //Singley Linked List
         System.out.println("Contact Name Already exists. Please choose a different name");
     }
 
-    public void delete() {
-
+    public void deleteContact(String deleteName) {
+        Contact deleteContact = findContact(deleteName);
+        if (deleteContact != null) {
+            if (deleteContact == head) {
+                head = head.next;
+                if (head != null)
+                    head.prev = null;
+            } else if (deleteContact == tail) {
+                tail = tail.prev;
+                tail.next = null;
+            } else {
+                deleteContact.prev.next = deleteContact.next;
+                deleteContact.next.prev = deleteContact.prev;
+            }
+            System.out.println("Contact deleted.");
+            return;
+        }
+        System.out.println("Contact not found.");
+    }
 
     public Contact callContact(String callName){
         Contact callContact = findContact(callName);

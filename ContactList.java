@@ -52,9 +52,11 @@ public class ContactList { //Singley Linked List
     public Contact callContact(String callName){
         Contact callContact = findContact(callName);
         if (callContact != null) {
-            System.out.printf("Calling %s on the number: %s...",callContact.name,callContact.number);
+            System.out.printf("Calling '%s'...%n",callContact.name);
+            System.out.printf("You called '%s' successfully.%n", callContact.name);
             return callContact;
         }
+        System.out.println("Call failed...\nContact not found.");
         return null;
     };
 

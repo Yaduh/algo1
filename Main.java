@@ -4,7 +4,7 @@ public class Main {
     public static void main(String... args) {
         System.out.println("Welcome to the Phone Book App\n");
         ContactList contacts = new ContactList();
-
+        RecentCalls recentCalls = new RecentCalls();
         Scanner input = new Scanner(System.in);
         int choice = -1;
         while (choice != 0) {
@@ -19,10 +19,11 @@ public class Main {
                     contacts.displayContactList();
                     break;
                 case 3:
-                    contacts.callContact(getContactName());
+                    Contact recent = contacts.callContact(getContactName());
+                    recentCalls.addCaller(recent); // adding caller to recent contacts
                     break;
                 case 4:
-                    contacts.recentCalls();
+                    recentCalls.display();
                     break;
                 case 5:
                     contacts.deleteContact(getContactName());

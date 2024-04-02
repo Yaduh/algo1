@@ -2,7 +2,6 @@
 public class ContactList { //Singley Linked List
     public Contact head;
     public Contact tail;
-    public RecentCalls recentCalls;
     public int size;
 
     public ContactList(){
@@ -30,38 +29,16 @@ public class ContactList { //Singley Linked List
         System.out.println("Contact Name Already exists. Please choose a different name");
     }
 
-    public void deleteContact(String deleteName){
-        Contact deleteContact = findContact(deleteName);
-        if (deleteContact != null){
-            if (deleteContact == this.tail) {
-                deleteContact.prev.next = null;
-                this.tail = deleteContact.prev;
-                deleteContact.prev = null;
-                this.size--;
-                return;
-            }
-            if (deleteContact == this.head) {
-                deleteContact.next.prev = null;
-                this.head = deleteContact.next;
-                deleteContact.next = null;
-                this.size--;
-                return;
-            }
-            deleteContact.prev.next = deleteContact.next;
-            deleteContact.next.prev = deleteContact.prev;
-            deleteContact.next = deleteContact.prev = null;
-            this.size--;
-            return;
-        }
+    public void delete() {
 
-    }
 
-    public void callContact(String callName){
+    public Contact callContact(String callName){
         Contact callContact = findContact(callName);
-
         if (callContact != null) {
             System.out.printf("Calling %s on the number: %s...",callContact.name,callContact.number);
-        };
+            return callContact;
+        }
+        return null;
     };
 
     public void modifyContactName(String oldContactName,String newName){
@@ -79,26 +56,30 @@ public class ContactList { //Singley Linked List
     }
 
     public void displayContactList(){
-
-    }
+            if (head == null){
+                System.out.println("Empty");
+            }else{
+                Contact current = head; //start from tail (make a copy of data in tail)
+                while(current != null){
+                    System.out.println("Contact: " + current.name + "\nContact Number: " + current.number);
+                    current = current.next; //iterate through the copy of the list
+                }
+            }
+        }
 
     //searches for contact by name
-    //returns searched contact or null if not found 
-    private Contact findContact(String findName){
-        Contact currentContact = this.head;
-
-        for (int i = 0; i < size; i++) {
-
-            if (currentContact.name == findName) {
-                System.out.println("If statement reached");
+    //returns searched contact or null if not found
+    public Contact findContact(String name) {
+        Contact currentContact = head;
+        while (currentContact != null) {
+            if (currentContact.name.equals(name)) {
                 return currentContact;
             }
-
             currentContact = currentContact.next;
-
-        };
-
+        }
         System.out.println("Provided Name Does Not Exist in the Contact List");
-        return null;
-    };
+        return null; // Contact not found
+    }
+    
 }
+

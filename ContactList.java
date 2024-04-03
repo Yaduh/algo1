@@ -1,5 +1,7 @@
+import java.util.Scanner;
 
 public class ContactList { //Singley Linked List
+    public Scanner input = new Scanner(System.in);
     public Contact head;
     public Contact tail;
     public int size;
@@ -25,8 +27,9 @@ public class ContactList { //Singley Linked List
             System.out.println("Contact Added Successfully");
             this.size++;
             return;
-        }
+        }else{
         System.out.println("Contact Name Already exists. Please choose a different name");
+    }
     }
 
     public void deleteContact(String deleteName) {
@@ -59,19 +62,52 @@ public class ContactList { //Singley Linked List
         System.out.println("Call failed...\nContact not found.");
         return null;
     };
+    // public void modifyContact(){
+    //     int choice = 0;
+    //     String oldContactName;
+    //     String oldContactNumber;
+    //     switch (choice) {
+    //         case 1:
+    //         modifyContactName(oldContactName);
+    //             break;
+    //         case 2:
+    //         modifyContactNumber(oldContactNumber);
+    //             break;
+    //         case 3:
 
-    public void modifyContactName(String oldContactName,String newName){
-        Contact oldContact = findContact(newName);
+    //             break;
+    //             default:
+    //             System.out.println("Invalid choice. Please select a valid option.");
+    //             break;
+    // }
+    public void modifyContactName(String oldContactName){
+        String newName;
+        Contact oldContact = findContact(oldContactName);
+        System.out.print("Please enter the new name: ");
+        newName = input.nextLine();
         if (oldContact != null) {
-            oldContact.number = newName;
+            if (findContact(newName) == null){
+                oldContact.name = newName;
+            } else {
+                System.out.println("Contact Name Already exists. Please choose a different name");
         }
+        } else {
+            System.out.println("Please enter a valid name. (Null space not accepted)");}
     }
 
-    public void modifyContactNumber(String oldContactName, String newNumber){
-        Contact oldContact = findContact(oldContactName);
+    public void modifyContactNumber(String oldContactNumber){
+        String newNumber;
+        Contact oldContact = findContact(oldContactNumber);
+        System.out.print("Please enter the new number: ");
+        newNumber = input.nextLine();
         if (oldContact != null) {
-            oldContact.number = newNumber;
-        };
+            if (findContact(newNumber) == null){
+                oldContact.number = newNumber;
+            } else {
+                System.out.println("Contact number Already exists. Please choose a different number");
+        }
+        } else {
+            System.out.println("Please enter a valid number. (Null space not accepted)");}
     }
 
     public void displayContactList(){
@@ -91,7 +127,7 @@ public class ContactList { //Singley Linked List
     public Contact findContact(String name) {
         Contact currentContact = head;
         while (currentContact != null) {
-            if (currentContact.name.equals(name)) {
+            if (currentContact.name.equals(name) || currentContact.number.equals(name)) {
                 return currentContact;
             }
             currentContact = currentContact.next;

@@ -29,7 +29,7 @@ public class RecentCalls { //stack
     }
 
 
-    public void display() {
+    public void displayRecent() {
         System.out.println("List of recent calls:");
         if (top == -1) {
             System.out.println("No calls were made");

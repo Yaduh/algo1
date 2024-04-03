@@ -23,14 +23,14 @@ public class Main {
                     recentCalls.addCaller(recent); // adding caller to recent contacts
                     break;
                 case 4:
-                    recentCalls.display();
+                    recentCalls.displayRecent();
                     break;
                 case 5:
                     contacts.deleteContact(getContactName());
                     break;
                 case 6:
-                    System.out.println("Enter old Contact name then new contact name");
-                    contacts.modifyContactName(getContactName(), getContactName());
+                    contacts.modifyContactName(getContactName());
+                    contacts.modifyContactNumber(getContactNumber());
                     break;
                 case 0:
                     System.out.println("Exiting...");
@@ -55,5 +55,6 @@ public class Main {
         String number = input.nextLine();
         return number;
     }
+    
     
 }
